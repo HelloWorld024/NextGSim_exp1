@@ -147,6 +147,9 @@ class RANSimulation(threading.Thread):
                                 self.history[user] = (1 - 1 / T) * history_last[user] + (1 / (T)) * user_throughput[user]
                             self.throughput_history.append(user_throughput)
                     '------------------------ Transmission delay -------------------------------------------------'
+                    user_packet_data = list(map(lambda x: x+0.001,user_packet_data))
+                    user_throughput = list(map(lambda x: x+0.001,user_throughput))
+
                     transmission_latency = np.divide(user_packet_data, user_throughput) * 1000
                     transmission_latency[transmission_latency == np.inf] = None
                     if self.sim_params.store_latency:

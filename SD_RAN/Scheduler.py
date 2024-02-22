@@ -72,7 +72,7 @@ class RadioResourceSchedulers(object):
                 for PRB in range(0, self.num_PRBs):
                     for user in connected_devices_ID:
                         inst_data_rate[user, PRB] = 180 * np.log2(1 + 10**(self.SINR[BS_index, user, PRB]/10))
-                        score[user, PRB] = (inst_data_rate[user, PRB])**self.alpha/(history[user])**self.beta
+                        score[user, PRB] = (inst_data_rate[user, PRB])**self.alpha+0.001/(history[user]+0.001)**self.beta
                     selected_device = np.argmax(score[:, PRB])
                     self.RR_assignment[BS_index, selected_device, PRB] = 1
         return self.RR_assignment, self.user_BS

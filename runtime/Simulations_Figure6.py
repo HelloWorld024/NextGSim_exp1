@@ -1,6 +1,8 @@
 import os
 import csv
 import sys
+
+sys.path.append('../NextGSim_exp1')
 from definitions import RESULTS_DIR, ROOT_DIR
 
 os.chdir(ROOT_DIR)
@@ -98,7 +100,10 @@ class Simulation:
         self.results_folder = RESULTS_DIR + self.results_folder
         header = ["Message Name", "User ID", "Sequence Number", "UL Latency", "Processing Time", "Total Latency",
                   "Delay Budget"]
-
+        
+        dir = self.results_folder[:self.results_folder.rfind('/')]
+        Path(dir).mkdir(parents=True,exist_ok=True)
+        
         with open(self.results_folder, 'w', encoding='UTF8', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(header)

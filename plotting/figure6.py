@@ -2,15 +2,16 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os
 import numpy as np
-from runtime.SimulationParameters import SimulationParameters
+# from runtime.SimulationParameters import SimulationParameters
 import seaborn
 import tikzplotlib
-
+import sys
+sys.path.append('../NextGSim-main')
 from definitions import RESULTS_DIR
 
 seaborn.set(style="ticks")
 
-sim_params = SimulationParameters()
+# sim_params = SimulationParameters()
 
 
 class Figure6:
