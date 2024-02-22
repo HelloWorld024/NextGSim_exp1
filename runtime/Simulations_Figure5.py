@@ -3,7 +3,8 @@ import csv
 import sys
 
 
-sys.path.append('../NextGSim-main')
+sys.path.append('../NextGSim_exp1')
+
 from definitions import RESULTS_DIR, ROOT_DIR
 
 os.chdir(ROOT_DIR)

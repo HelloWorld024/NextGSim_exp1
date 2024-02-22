@@ -5,7 +5,7 @@ import numpy as np
 from runtime.SimulationParameters import SimulationParameters
 import seaborn
 import sys
-sys.path.append('../NextGSim-main')
+sys.path.append('../NextGSim_exp1')
 from definitions import RESULTS_DIR
 
 seaborn.set(style="ticks")
