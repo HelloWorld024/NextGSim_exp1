@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import os
 import numpy as np
-from runtime.SimulationParameters import SimulationParameters
+# from runtime.SimulationParameters import SimulationParameters
 import seaborn
 import sys
 sys.path.append('../NextGSim_exp1')

@@ -94,19 +94,26 @@ class Simulation:
         self.mec_simulation = MECSimulation(self)
         self.ran_simulation = RANSimulation(self)
 
-        self.initialize_results_folder()
+        # flag to check if result file already exist
+        self.ISFileExist = self.initialize_results_folder()
 
     def initialize_results_folder(self):
         self.results_folder = RESULTS_DIR + self.results_folder
         header = ["Message Name", "User ID", "Sequence Number", "UL Latency", "Processing Time", "Total Latency",
                   "Delay Budget"]
         
+        fileExist = os.path.isfile(self.results_folder)
+
+        
+        # create directory or folder if not exist
         dir = self.results_folder[:self.results_folder.rfind('/')]
         Path(dir).mkdir(parents=True,exist_ok=True)
         
         with open(self.results_folder, 'w', encoding='UTF8', newline='') as f:
             writer = csv.writer(f)
             writer.writerow(header)
+        
+        return fileExist
 
     def initialize_physicalEnvironment(self):
         if self.sim_params.scenario.scenario == 'Indoor':
@@ -124,6 +131,10 @@ class Simulation:
         return
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': 
     simulation = Simulation()
-    simulation.run()
+    # if file already exist then skip simulation run
+    if(simulation.ISFileExist):
+        print("--------------- Results already exists ---------------")
+    else:
+        simulation.run()
