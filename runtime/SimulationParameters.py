@@ -24,7 +24,7 @@ class SimulationParameters(object):
         self.with_mobility: bool = True  # UEs with dynamic mobility
         self.generate_mobility_traces: bool = False  # generate traces or read a data set (path in Scenario)
         self.channel_metric_for_handover: str = 'RSRP'  # 'RSRP' 'SINR'
-        self.scenario: object = IndoorFactorySL()  # IndoorFactorySL()  # Indoor() # Outdoor()
+        self.scenario: object = Outdoor()  # IndoorFactorySL()  # Indoor() # Outdoor()
         self.num_cells: int = 18
         self.max_cells_in_one_row = 10  # for plotting purpose
         self.communication_type: str = 'UL'

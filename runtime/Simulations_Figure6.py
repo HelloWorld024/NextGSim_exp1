@@ -108,6 +108,8 @@ class Simulation:
         # create directory or folder if not exist
         dir = self.results_folder[:self.results_folder.rfind('/')]
         Path(dir).mkdir(parents=True,exist_ok=True)
+        if(fileExist):
+            return fileExist
         
         with open(self.results_folder, 'w', encoding='UTF8', newline='') as f:
             writer = csv.writer(f)

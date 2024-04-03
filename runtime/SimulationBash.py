@@ -63,9 +63,16 @@ class Simulation:
         # self.result_file
         header = ["Num_of_Users", "Memory Used", "Simulation Runtime"]
 
-        with open(self.result_file, 'w', encoding='UTF8', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow(header)
+
+        self.ISFileExist = os.path.isfile(self.results_folder)
+
+        dir = self.results_folder[:self.results_folder.rfind('/')]
+        Path(dir).mkdir(parents=True,exist_ok=True)
+
+        if(not(self.ISFileExist)):
+            with open(self.result_file, 'w', encoding='UTF8', newline='') as f:
+                writer = csv.writer(f)
+                writer.writerow(header)
 
     def run(self):
         self.mec_simulation.start()
@@ -87,4 +94,10 @@ class Simulation:
 
 if __name__ == '__main__':
     simulation = Simulation()
-    simulation.run()
+
+    # if file already exist then skip simulation run
+    if(simulation.ISFileExist):
+        print("--------------- Results already exists ---------------")
+    else:
+        simulation.run()
+
