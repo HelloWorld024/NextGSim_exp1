@@ -23,14 +23,16 @@ class InitialSetUp(ABC):
         user_coordinates = []
         x_range = [self.room_limits[0][0], self.room_limits[0][1]]
         y_range = [self.room_limits[1][0], self.room_limits[1][1]]
+        z_range = [self.room_limits[2][0], self.room_limits[2][1]]
         for user_id in range(self.sim_params.scenario.max_num_devices_per_scenario):
             radius = self.sim_params.scenario.cell_radius
             x = np.random.uniform(low=x_range[0]+radius/4, high=x_range[1]-radius/4, size=1)
             y = np.random.uniform(low=y_range[0]+radius/4, high=y_range[1]-radius/4, size=1)
+            z = np.random.uniform(low=z_range[0]+radius/4, high=z_range[1]-radius/4, size=1)
             max_speed = np.random.uniform(0.1, 6)
-            user = Device(user_id, x, y, self.room_limits[0][0], self.room_limits[0][1], self.room_limits[1][0],
-                          self.room_limits[1][1], max_speed,  self.sim_params.scenario.device_transmit_power, self.simulation)
-            user_coordinates.append([int(x), int(y)])
+            user = Device(user_id, x, y, z, self.room_limits[0][0], self.room_limits[0][1], self.room_limits[1][0],
+                          self.room_limits[1][1],self.room_limits[2][0], self.room_limits[2][1], max_speed,  self.sim_params.scenario.device_transmit_power, self.simulation)
+            user_coordinates.append([int(x), int(y),int(z)])
             devices_per_scenario.append(user)
         # self.log(f"Created {len(devices_per_scenario)} users located within X:[{x_range}], Y:[{y_range}]")
         return devices_per_scenario, np.array(user_coordinates)
@@ -87,7 +89,7 @@ class InitialSetUpIndoorFactory(InitialSetUp):
             y = gNB_coordinates[gnb_id, 1]
             gNB = GnB(gnb_id, x, y, self.simulation)
             gNBs_per_scenario.append(gNB)
-        self.room_limits = [[0, 120], [0, 60]]
+        self.room_limits = [[1, 120], [1, 60], [1,100]]
         return gNBs_per_scenario
 
 

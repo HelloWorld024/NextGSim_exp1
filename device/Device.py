@@ -9,17 +9,20 @@ import random
 
 
 class Device(ComputeNode):
-    def __init__(self, ID, x, y, min_x, max_x, min_y, max_y, max_speed, transmit_power, simulation):
+    def __init__(self, ID, x, y, z,min_x, max_x, min_y, max_y, min_z, max_z, max_speed, transmit_power, simulation):
         # self.sim_traffic = simulation.traffic_generator
         self.sim_param = simulation.sim_params
         self.event_chain = simulation.event_chain
         self.ID = ID
         self.x = x
         self.y = y
+        self.z = z
         self.min_x = min_x
         self.max_x = max_x
         self.min_y = min_y
         self.max_y = max_y
+        self.min_z = min_z
+        self.max_z = max_z
         self.max_speed = max_speed
         self.direction_x = random.uniform(-1, 1)
         self.direction_y = random.uniform(-1, 1)

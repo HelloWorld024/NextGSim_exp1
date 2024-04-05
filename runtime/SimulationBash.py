@@ -63,7 +63,6 @@ class Simulation:
         # self.result_file
         header = ["Num_of_Users", "Memory Used", "Simulation Runtime"]
 
-
         self.ISFileExist = os.path.isfile(self.results_folder)
 
         dir = self.results_folder[:self.results_folder.rfind('/')]
