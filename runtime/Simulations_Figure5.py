@@ -111,7 +111,7 @@ class Simulation:
         return fileExist
 
     def initialize_physicalEnvironment(self):
-        print(self.sim_params.scenario.scenario)
+        print("Scenario : ",self.sim_params.scenario.scenario)
 
         if self.sim_params.scenario.scenario == 'Indoor':
             self.setup = InitialSetUpIndoor(self)

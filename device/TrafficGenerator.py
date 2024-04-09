@@ -3,6 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 import math
 from runtime.data_classes import AggregatedTraffic
+from runtime.data_classes import Frequencies, AggregatedTraffic, MeasurementParams
 
 
 class TrafficGenerator:
@@ -24,7 +25,7 @@ class TrafficGenerator:
         print(self.simulation.sim_params.scenario.max_num_devices_per_scenario)
         self.nr_devices_minimum = simulation.sim_params.scenario.min_num_devices_per_scenario
         self.nr_devices_maximum = simulation.sim_params.scenario.max_num_devices_per_scenario
-        self.aggregated_traffic_model = simulation.sim_params.agreggated_traffic_model
+        self.aggregated_traffic_model = AggregatedTraffic.model2
         self.simulation = simulation
         self.period = self.simulation.sim_params.num_TTI  # s
         self.beta_alpha = 3

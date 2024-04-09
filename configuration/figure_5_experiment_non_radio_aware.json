@@ -99,7 +99,7 @@
       "1": {
       "from": 1,
       "to": 5,
-      "application": "RANApplicationPublic",
+      "application": "RANAppBlockchainPublic",
       "num_of_instances": 10
 }},
     "mobile_devices":{
@@ -107,7 +107,7 @@
     {
         "from": 1,
         "to" : "all",
-        "application": "RANApplicationPublic"
+        "application": "RANAppBlockchainPublic"
     }
   }
   }

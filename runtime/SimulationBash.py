@@ -3,6 +3,7 @@ import os
 import sys
 
 # import numpy as np
+sys.path.append('../NextGSim_exp1')
 
 from InitialSetUp import InitialSetUpIndoor, InitialSetUpOutdoor, InitialSetUpIndoorFactory
 from utilities import utility
@@ -10,16 +11,16 @@ from pathlib import Path
 import threading
 import logging.config
 from RANSimulation import RANSimulation
-from edge.core.MECSimulation import MECSimulation
+from runtime.MECSimulation import MECSimulation
 from attic.Application import *
-from SimulationParameters import SimulationParameters
+# from SimulationParameters import SimulationParameters
 from EventChain import EventChain
 from device.TrafficGenerator import TrafficGenerator
 import logging.config
 from Parse_configuration import SimulationParameters
 import numpy as np
 import pandas as pd
-
+import simpy
 # np.set_printoptions(threshold=np.inf)
 utility.format_figure()
 
@@ -39,15 +40,16 @@ class Simulation:
         # random.seed(0)
         self.record_results = True
         self.setup = None
+        self.env = simpy.Environment()
         self.user_coordinates = None
         self.devices_per_scenario = None
         self.gNBs_per_scenario = None
         self.edge_servers_per_scenario = []
         self.routers_per_scenario = []
-        self.sim_params = SimulationParameters()
+        self.sim_params = SimulationParameters(self)
         self.applications = redcap_application()
-        self.file_sim_params = SimulationParameters(self, ConfigFile=self.sim_params.use_configFile,
-                                                    ConfigFileName="figure_5_experiment_radio_aware.json")
+        self.file_sim_params = SimulationParameters(self, ConfigFile=True,
+                                                  ConfigFileName="figure_5_experiment_radio_aware.json")
         self.traffic_generator = TrafficGenerator(self)
         self.event_chain = EventChain()
         self.stop = False
@@ -58,7 +60,7 @@ class Simulation:
         self.mec_simulation = MECSimulation(self)
         self.ran_simulation = RANSimulation(self)
 
-        self.result_file = os.pardir + '/results/reproduction/num_of_user_' + str(sys.argv[1]) + '.csv'
+        self.result_file = os.pardir + '/results/reproduction/exp/num_of_user_' + str(sys.argv[1]) + '.csv'
 
         # self.result_file
         header = ["Num_of_Users", "Memory Used", "Simulation Runtime"]
